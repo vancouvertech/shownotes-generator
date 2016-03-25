@@ -1,0 +1,20 @@
+{
+  "name": "vtp-shownotes",
+  "version": "1.0.0",
+  "description": "Generate shownotes for a Vancouver Tech Podcast episode",
+  "main": "js/index.js",
+  "scripts": {
+    "build": "browserify js/index.js | uglifyjs -cm > js/bundle.min.js",
+    "watch": "watchify js/index.js -o js/bundle.js -dv"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.6",
+    "uglify": "^0.1.5",
+    "watchify": "^3.2.3"
+  },
+  "author": "Vancouver Tech Podcast <show@vancouvertechpodcast.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.12.0"
+  }
+}
