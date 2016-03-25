@@ -84,6 +84,8 @@ Vue.component('james-style', {
 var app = new Vue({
   el: "body",
   data: {
+    now: moment().format('MMMM Do'),
+    nextWeek: moment().add(7, 'days').format('MMMM Do'),
     events: [],
     errorMessage: '',
     currentTemplate: 'drew-style'
@@ -103,6 +105,7 @@ var app = new Vue({
   methods: {
     loadEvents: function(data) {
       this.events = data;
+      document.body.classList.add('loaded');
     },
     showError: function(err) {
       this.errorMessage = err.message;
