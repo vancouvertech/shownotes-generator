@@ -1,19 +1,28 @@
 var moment = require('moment');
+var request = require('browser-request');
 
 // the array of groups we are checking for events on
 var groups = require('./groups');
 
 function loadEvents() {
   return groups.map(function(name) {
-    return fetch(name, {
-      mode: 'no-cors' // must have
+    // return fetch(name, {
+    //   mode: 'no-cors' // must have
+    // });
+    return new Promise(function(resolve, reject) {
+      request(name, function(er, response, body) {
+        if(er){
+          reject(er);
+        }
+        resolve(body);
+      });
     });
   });
 }
 
 function jsonOnArray(arrs) {
   return arrs.map(function(arr) {
-    return arr.json();
+    return JSON.parse(arr);
   });
 }
 

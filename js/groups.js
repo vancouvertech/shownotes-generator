@@ -3,9 +3,9 @@
 // getting all the events from there
 
 module.exports = [
-  'events.json',
-  'events2.json',
-  'events3.json',
+  'http://vancouvertechpodcast.github.io/shownotes-generator/events.json',
+  'http://vancouvertechpodcast.github.io/shownotes-generator/events2.json',
+  'http://vancouvertechpodcast.github.io/shownotes-generator/events3.json',
   // 'Vancouver-Tech-Co-Founders', // Vancouver Pixel Crafters
   // 'HackerNestVAN',
   // 'Vancouver-PHP',
