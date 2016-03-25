@@ -37,7 +37,7 @@
   <template id="drew-style">
     <ul>
       <li v-for="event in $parent.events">
-        <a v-bind:href="event.link" v-bind:title="event.name" target="_blank"><strong>{{ event.name }}</strong></a> ({{ event.venue.name }} {{ event.venue.address_1 }}) {{ event.date }} <span v-if="event.fee"><u>Price: ${{ event.fee.amount }}</u></span></strong>
+        <a v-bind:href="event.link" v-bind:title="event.name" target="_blank"><strong>{{ event.name }}</strong></a> ({{ event.venue.name }} {{ event.venue.address_1 }}), {{ event.date }} <span v-if="event.fee"><u>Price: ${{ event.fee.amount }}</u></span>
       </li>
     </ul>
   </template>
@@ -50,6 +50,11 @@
       <p v-if="event.fee"><u>Price: ${{ event.fee.amount }}</u></p>
     </div>
   </template>
+  <template id="markdown-style">
+    <p v-for="event in $parent.events" class="event-james">
+      * [{{ event.name }}]({{ event.link }}) ({{ event.venue.name }} {{ event.venue.address_1 }}), {{ event.date }} <span v-if="event.fee">**Price: ${{ event.fee.amount }}**</span>
+    </p>
+  </template>
   <div class="container">
     <h3>Meetups For The Week Of {{ now }} to {{ nextWeek }}</h3>
     <p>{{ errorMessage }}</p>
@@ -59,6 +64,9 @@
       </div>
       <div class="column column-20">
         <label><input type="radio" name="template" value="james-style" v-model="currentTemplate"> James Style</label>
+      </div>
+      <div class="column column-20">
+        <label><input type="radio" name="template" value="markdown-style" v-model="currentTemplate"> Markdown Style</label>
       </div>
     </div>
     <component :is="currentTemplate"></component>

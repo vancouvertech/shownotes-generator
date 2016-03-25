@@ -81,6 +81,15 @@ Vue.component('james-style', {
   template: '#james-style'
 });
 
+Vue.component('markdown-style', {
+  template: '#markdown-style'
+});
+
+Vue.component('markdown-list', {
+  props: ['title', 'link'],
+  template: '* [{{ title }}]({{ link }})'
+});
+
 var app = new Vue({
   el: "body",
   data: {
