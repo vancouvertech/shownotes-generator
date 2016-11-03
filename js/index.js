@@ -6,9 +6,6 @@ var groups = require('./groups');
 
 function loadEvents() {
   return groups.map(function(name) {
-    // return fetch(name, {
-    //   mode: 'no-cors' // must have
-    // });
     return new Promise(function(resolve, reject) {
       request(name, function(er, response, body) {
         if(er){
@@ -59,17 +56,26 @@ function sortByTime(arr) {
 function addFormattedTime(arr) {
   return arr.map(function(ev) {
     ev.date = moment(ev.time).format('dddd MMMM Do hh:mm A');
+    ev.day = moment(ev.time).format('dddd Do');
     return ev;
   });
 }
 
 function addAdditional(arrs) {
   return arrs.map(function(elem) {
-    if (!elem.venue) {
-      elem.venue = {};
-      elem.venue.name = '';
-    }
+    elem.venue = elem.venue || '';
+    elem.fee = elem.fee || null;
     return elem;
+  });
+}
+
+function groupByDay(arrs) {
+  return arrs.map(function(arr) {
+    if (arrs[arr.date]) {
+      arrs[arr.date].push(arr);
+    } else {
+      arrs[arr.date] = [arr];
+    }
   });
 }
 
@@ -108,6 +114,7 @@ var app = new Vue({
     .then(sortByTime)
     .then(addFormattedTime)
     .then(addAdditional)
+    .then(groupByDay)
     .then(this.loadEvents)
     // .catch(this.showError);
   },

@@ -5,7 +5,7 @@
   "main": "js/index.js",
   "scripts": {
     "postinstall" : "mkdir -p css && mv node_modules/milligram/dist/milligram.min.css css/milligram.min.css",
-    "build": "browserify js/index.js | uglifyjs -cm > js/bundle.min.js",
+    "build": "NODE_ENV=production browserify js/index.js | uglifyjs -cm > js/bundle.min.js",
     "watch": "watchify js/index.js -o js/bundle.js -dv"
   },
   "devDependencies": {
